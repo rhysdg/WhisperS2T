@@ -26,7 +26,7 @@ from tensorrt_llm import str_dtype_to_torch, str_dtype_to_trt
 from tensorrt_llm.logger import logger
 from tensorrt_llm.builder import Builder
 from tensorrt_llm.network import net_guard
-from tensorrt_llm.models import quantize_model
+from tensorrt_llm.quantization.quantize import quantize
 from tensorrt_llm.quantization import QuantMode
 from tensorrt_llm.plugin.plugin import ContextFMHAType
 from tensorrt_llm.functional import LayerNormPositionType, LayerNormType
@@ -83,7 +83,7 @@ def build_encoder(model, args):
     
     
     if args.use_weight_only_enc:
-        tensorrt_llm_whisper_encoder = quantize_model(
+        tensorrt_llm_whisper_encoder = quantize(
             tensorrt_llm_whisper_encoder, args.quant_mode_enc)
 
     load_encoder_weight(tensorrt_llm_whisper_encoder, model_metadata,
