@@ -30,6 +30,7 @@ from tensorrt_llm.quantization.quantize import quantize
 from tensorrt_llm.quantization import QuantMode
 from tensorrt_llm.plugin.plugin import ContextFMHAType
 from tensorrt_llm.functional import LayerNormPositionType, LayerNormType
+from temsort_llm.models.modeling_utils import PretrainedConfig
 
 from . import load_trt_build_config
 from .model_utils import load_encoder_weight, load_decoder_weight
@@ -76,7 +77,7 @@ def build_encoder(model, args):
         int(model_is_multilingual),
     )
 
-    tensorrt_llm_whisper_encoder = tensorrt_llm.models.WhisperEncoder(model_metadata)
+    tensorrt_llm_whisper_encoder = tensorrt_llm.models.WhisperEncoder(PretrainedConfig())
     
     
     if args.use_weight_only_enc:
