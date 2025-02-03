@@ -76,10 +76,7 @@ def build_encoder(model, args):
         int(model_is_multilingual),
     )
 
-    tensorrt_llm_whisper_encoder = tensorrt_llm.models.WhisperEncoder(
-        model_metadata['n_mels'], model_metadata['n_audio_ctx'],
-        model_metadata['n_audio_state'], model_metadata['n_audio_head'],
-        model_metadata['n_audio_layer'], str_dtype_to_trt(args.dtype))
+    tensorrt_llm_whisper_encoder = tensorrt_llm.models.WhisperEncoder(model_metadata)
     
     
     if args.use_weight_only_enc:
